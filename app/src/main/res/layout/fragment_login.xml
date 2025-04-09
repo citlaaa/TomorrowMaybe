@@ -28,7 +28,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/keep_39dp_8c1af6_fill0_wght400_grad0_opsz40" />
 
         <TextView
             android:id="@+id/textView"
