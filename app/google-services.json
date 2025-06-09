@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "897378909072",
+    "project_id": "tomorrowmaybe-78c16",
+    "storage_bucket": "tomorrowmaybe-78c16.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897378909072:android:7d6f5362e73679b72c5115",
+        "android_client_info": {
+          "package_name": "com.example.tomorrowmaybe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBBrISdhyg9VNkDf7L_mUN3mvnOoHqMdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
