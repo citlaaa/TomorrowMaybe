@@ -31,9 +31,6 @@
     <string name="error_field_required">Campo requerido</string>
 
 
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
 
     <string name="edit_task">Editar tarea</string>
     <string name="priority_high">Alta prioridad</string>

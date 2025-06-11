@@ -22,9 +22,14 @@
 
 
 
-    <!-- Colores de texto -->
-    <color name="text_primary">#DE000000</color>  <!-- Negro 87% opacidad (Material Design standard) -->
-    <color name="text_secondary">#8A000000</color>  <!-- Negro 54% opacidad -->
+    <color name="text_primary">#DE000000</color>
+    <color name="text_secondary">#8A000000</color>
+
+
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="red">#F44336</color> <!-- Rojo material -->
+    <color name="blue">#2196F3</color> <!-- Azul material -->
 
 
 </resources>
