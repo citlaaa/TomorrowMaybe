@@ -14,11 +14,35 @@ import com.example.tomorrowmaybe.model.Task
 import com.example.tomorrowmaybe.viewModel.TaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+import android.app.DatePickerDialog
+import java.util.Calendar
+
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 @AndroidEntryPoint
 class SecondFragment : Fragment() {
+
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, selectedYear, selectedMonth, selectedDay ->
+                // Formatear la fecha como desees (ejemplo: "dd/MM/yyyy")
+                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                binding.fechaEdit.setText(selectedDate)
+            },
+            year,
+            month,
+            day
+        )
+
+        datePickerDialog.show()
+    }
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
@@ -61,6 +85,11 @@ class SecondFragment : Fragment() {
                 Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.fechaEdit.setOnClickListener {
+            showDatePicker()
+        }
+
     }
 
     override fun onDestroyView() {

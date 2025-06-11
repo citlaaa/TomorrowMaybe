@@ -40,4 +40,6 @@
     <string name="task_date_sample">12/06/2023</string>
     <string name="priority_icon_desc">Prioridad alta</string>
 
+    <string name="delete_task">Eliminar tarea</string>
+
 </resources>
