@@ -3,25 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/login2">
+    app:startDestination="@id/Login">
     <fragment
-        android:id="@+id/login2"
+        android:id="@+id/Login"
         android:name="com.example.tomorrowmaybe.view.Login"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login">
+        android:label="Login">
         <action
-            android:id="@+id/action_login2_to_register2"
-            app:destination="@id/register2" />
+            android:id="@+id/action_Login_to_Register"
+            app:destination="@id/Register" />
 
     </fragment>
     <fragment
-        android:id="@+id/register2"
+        android:id="@+id/Register"
         android:name="com.example.tomorrowmaybe.view.Register"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register">
+        android:label="Register">
         <action
             android:id="@+id/action_register2_to_login2"
-            app:destination="@id/login2" />
+            app:destination="@id/Login" />
     </fragment>
 
 </navigation>

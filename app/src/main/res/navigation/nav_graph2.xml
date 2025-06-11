@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.tomorrowmaybe.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:label="FirstFragment">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -21,25 +20,23 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.tomorrowmaybe.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:label="SecondFragment">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 
-    //task
     <fragment
         android:id="@+id/fragmentTaskDetail"
         android:name="com.example.tomorrowmaybe.FragmentTaskDetail"
-        android:label="Task Detail"
         tools:layout="@layout/fragment_task_detail">
 
         <argument
             android:name="taskId"
             app:argType="string"
-            android:defaultValue="" />
+            android:defaultValue="@null"
+            app:nullable="true" />
 
         <action
             android:id="@+id/action_taskList_to_taskDetail"

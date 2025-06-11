@@ -54,7 +54,7 @@ class Login : Fragment() {
         }
 
         binding.textView3.setOnClickListener {
-            findNavController().navigate(R.id.action_login2_to_register2)
+            findNavController().navigate(R.id.action_Login_to_Register)
         }
     }
 

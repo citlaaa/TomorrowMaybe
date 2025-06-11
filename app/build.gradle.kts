@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.google.services.plugin)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.safeargs)
 }
 
 android {
