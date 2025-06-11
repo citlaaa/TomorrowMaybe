@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".core.TomorrowMaybeApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,14 +14,22 @@
         android:theme="@style/Theme.TomorrowMaybe"
         tools:targetApi="31">
         <activity
-            android:name=".view.MainActivity"
-            android:exported="true">
+            android:name=".ListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TomorrowMaybe" />
+        <activity
+            android:name=".view.OnboardingActivity"
+            android:exported="true"
+            android:theme="@style/Theme.TomorrowMaybe">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

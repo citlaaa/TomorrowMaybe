@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
-    <!-- Lottie animation -->
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/view3"
         android:layout_width="128dp"
