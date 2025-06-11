@@ -8,30 +8,27 @@ import com.example.tomorrowmaybe.model.Task
 
 class TasksAdapter(
     private var tasks: List<Task>,
-    private var onItemClick: (Task) -> Unit,
-    private var onEditClick: (Task) -> Unit,
-    private var onDeleteClick: (Task) -> Unit
+    private val onItemClick: (Task) -> Unit,
+    private val onEditClick: (Task) -> Unit,
+    private val onDeleteClick: (Task) -> Unit
 ) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(private val binding: ItemTaskBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(task: Task) {
-            binding.task = task
-            binding.executePendingBindings()
+        fun bind(task: Task) = with(binding) {
+            this.task = task
+            executePendingBindings()
 
-            binding.root.setOnClickListener { onItemClick(task) }
-            binding.ibEdit.setOnClickListener { onEditClick(task) }
-            binding.ibDelete.setOnClickListener { onDeleteClick(task) }
+            root.setOnClickListener { onItemClick(task) }
+            ibEdit.setOnClickListener { onEditClick(task) }
+            ibDelete.setOnClickListener { onDeleteClick(task) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val binding = ItemTaskBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemTaskBinding.inflate(inflater, parent, false)
         return TaskViewHolder(binding)
     }
 
@@ -39,7 +36,7 @@ class TasksAdapter(
         holder.bind(tasks[position])
     }
 
-    override fun getItemCount() = tasks.size
+    override fun getItemCount(): Int = tasks.size
 
     fun updateTasks(newTasks: List<Task>) {
         tasks = newTasks

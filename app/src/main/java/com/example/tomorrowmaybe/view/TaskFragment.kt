@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,9 +42,21 @@ class TaskFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        tasksAdapter = TasksAdapter(emptyList()) { task ->
-            // Aquí puedes manejar el clic en una tarea si lo necesitas
-        }
+        tasksAdapter = TasksAdapter(
+            emptyList(),
+            onItemClick = { task ->
+                // Acción al tocar el ítem
+                Toast.makeText(requireContext(), "Tarea: ${task.name}", Toast.LENGTH_SHORT).show()
+            },
+            onEditClick = { task ->
+                // Acción al tocar el botón de editar
+                Toast.makeText(requireContext(), "Editar: ${task.name}", Toast.LENGTH_SHORT).show()
+            },
+            onDeleteClick = { task ->
+                // Acción al tocar el botón de eliminar
+                Toast.makeText(requireContext(), "Eliminar: ${task.name}", Toast.LENGTH_SHORT).show()
+            }
+        )
 
         binding.recyclerViewTasks.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -51,6 +64,7 @@ class TaskFragment : Fragment() {
             setHasFixedSize(true)
         }
     }
+
 
     private fun setupObservers() {
         viewModel.tasks.observe(viewLifecycleOwner) { tasks ->
