@@ -1,107 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:padding="24dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btBack"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/arrow_back_ios_new_24px"
-        android:contentDescription="@string/descriptionBack"
-        app:backgroundTint="@color/black"
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvAddTask"
+        android:id="@+id/Detalles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Agregar tarea"
+        android:layout_marginStart="16dp"
+        android:text="Nueva Tarea"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/backButton"
+        app:layout_constraintStart_toEndOf="@id/backButton"
+        app:layout_constraintTop_toTopOf="@id/backButton" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfNameTask"
+        android:id="@+id/taskNameInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/nameTask"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddTask"
-        app:layout_constraintStart_toStartOf="parent">
+        android:hint="Nombre de la tarea"
+        app:layout_constraintTop_toBottomOf="@id/backButton">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietNameTask"
+            android:id="@+id/taskNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfDescription"
+        android:id="@+id/taskDescriptionInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/descriptionTask"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tfNameTask">
+        android:hint="Descripción"
+        app:layout_constraintTop_toBottomOf="@id/taskNameInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietDescription"
+            android:id="@+id/descripcionEdit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:lines="3" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfDate"
+        android:id="@+id/taskDateInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/dateTask"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tfDescription">
+        android:hint="Fecha límite"
+        app:layout_constraintTop_toBottomOf="@id/taskDescriptionInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietDate"
+            android:id="@+id/fechaEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"/>
+            android:focusable="false"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btAddingTask"
+        android:id="@+id/saveTaskButton"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/blue"
-        android:hint="@string/addingTask"
-        android:textColorHint="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tfDate" />
-
-
-
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/purple_700"
+        android:text="Guardar Tarea"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/taskDateInputLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,6 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/correoL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Correo:" />
@@ -81,6 +82,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contraseñaL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña:" />

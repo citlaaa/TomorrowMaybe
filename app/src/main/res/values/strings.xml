@@ -2,4 +2,45 @@
     <string name="app_name">TomorrowMaybe</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Fragment First -->
+    <string name="menu_description">Menú</string>
+    <string name="pending_tasks">Tareas pendientes</string>
+    <string name="add_task">Agregar tarea</string>
+
+    <!-- Fragment Second -->
+    <string name="back_button">Volver</string>
+    <string name="task_name">Nombre de tarea</string>
+    <string name="task_description">Descripción</string>
+
+    <string name="save_task">Guardar tarea</string>
+
+    <string name="no_tasks_message">No hay tareas\n¡Toca el botón + para crear una!</string>
+
+
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+
+
+    <string name="task_details">Detalles de la Tarea</string>
+    <string name="task_title">Título</string>
+    <string name="description">Descripción</string>
+    <string name="due_date">Fecha límite</string>
+    <string name="save">Guardar</string>
+    <string name="delete">Eliminar</string>
+    <string name="error_field_required">Campo requerido</string>
+
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <string name="edit_task">Editar tarea</string>
+    <string name="priority_high">Alta prioridad</string>
+
+    <string name="task_title_sample">Título de la tarea</string>
+    <string name="task_description_sample">Descripción de la tarea</string>
+    <string name="task_date_sample">12/06/2023</string>
+    <string name="priority_icon_desc">Prioridad alta</string>
+
 </resources>
