@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tomorrowmaybe.R
 import com.example.tomorrowmaybe.databinding.FragmentTaskBinding
-import com.example.tomorrowmaybe.model.Task
-import com.example.tomorrowmaybe.view.adapter.TasksAdapter
+import com.example.tomorrowmaybe.view.adapter.TaskAdapter
 import com.example.tomorrowmaybe.viewModel.TaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,8 +20,9 @@ class TaskFragment : Fragment() {
 
     private var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!
+
     private val viewModel: TaskViewModel by viewModels()
-    private lateinit var tasksAdapter: TasksAdapter
+    private lateinit var tasksAdapter: TaskAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,53 +36,55 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView()
-        setupObservers()
-
-        viewModel.fetchTasks()
-    }
-
-    private fun setupRecyclerView() {
-        tasksAdapter = TasksAdapter(
-            emptyList(),
+        // Inicializa el adaptador
+        tasksAdapter = TaskAdapter(
+            tasks = mutableListOf(),
             onItemClick = { task ->
-                // Acción al tocar el ítem
-                Toast.makeText(requireContext(), "Tarea: ${task.name}", Toast.LENGTH_SHORT).show()
-            },
-            onEditClick = { task ->
-                // Acción al tocar el botón de editar
-                Toast.makeText(requireContext(), "Editar: ${task.name}", Toast.LENGTH_SHORT).show()
+                // Navegar a detalle de tarea (si deseas implementar)
+                val action = TaskFragmentDirections
+                    .actionTaskFragmentToTaskDetailFragment(task.id)
+                findNavController().navigate(action)
             },
             onDeleteClick = { task ->
-                // Acción al tocar el botón de eliminar
-                Toast.makeText(requireContext(), "Eliminar: ${task.name}", Toast.LENGTH_SHORT).show()
+                viewModel.deleteTask(task.id)
+            },
+            onEditClick = { task ->
+                val action = TaskFragmentDirections
+                    .actionTaskFragmentToNewTaskFragment(task.id) // <-- Si envías el ID para editar
+                findNavController().navigate(action)
             }
         )
 
-        binding.recyclerViewTasks.apply {
+        // Configura el RecyclerView
+        binding.tasksRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = tasksAdapter
             setHasFixedSize(true)
         }
-    }
 
+        // Botón para agregar nueva tarea
+        binding.fabAddTask.setOnClickListener {
+            val action = TaskFragmentDirections.actionTaskFragmentToNewTaskFragment(null)
+            findNavController().navigate(action)
+        }
 
-    private fun setupObservers() {
-        viewModel.tasks.observe(viewLifecycleOwner) { tasks ->
-            tasks?.let {
-                tasksAdapter.updateTasks(it)
-            }
+        // Observadores
+        viewModel.tasks.observe(viewLifecycleOwner) { lista ->
+            tasksAdapter.updateTasks(lista)
         }
 
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
-            // Aquí puedes manejar el estado de carga si lo deseas
+            // Puedes mostrar un ProgressBar si tienes uno
         }
 
         viewModel.error.observe(viewLifecycleOwner) { error ->
             error?.let {
-                // Mostrar error al usuario
+                Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
             }
         }
+
+        // Cargar tareas
+        viewModel.fetchTasks()
     }
 
     override fun onDestroyView() {
@@ -89,3 +92,4 @@ class TaskFragment : Fragment() {
         _binding = null
     }
 }
+

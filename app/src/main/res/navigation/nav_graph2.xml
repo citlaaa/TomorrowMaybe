@@ -3,52 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph2"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/taskFragment">
 
+    <!-- Fragmento principal: Lista de tareas -->
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.tomorrowmaybe.FirstFragment"
-        android:label="FirstFragment">
-
+        android:id="@+id/taskFragment"
+        android:name="com.example.tomorrowmaybe.view.TaskFragment"
+        android:label="Tareas Pendientes"
+        tools:layout="@layout/fragment_task">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_taskFragment_to_newTaskFragment"
+            app:destination="@id/newTaskFragment" />
         <action
-            android:id="@+id/action_FirstFragment_to_fragmentTaskDetail"
-            app:destination="@id/fragmentTaskDetail" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.tomorrowmaybe.SecondFragment"
-        android:label="SecondFragment">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_taskFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
     </fragment>
 
+    <!-- Fragmento para agregar o editar tarea -->
     <fragment
-        android:id="@+id/fragmentTaskDetail"
-        android:name="com.example.tomorrowmaybe.FragmentTaskDetail"
-        tools:layout="@layout/fragment_task_detail">
+        android:id="@+id/newTaskFragment"
+        android:name="com.example.tomorrowmaybe.view.NewTaskFragment"
+        android:label="Nueva Tarea"
+        tools:layout="@layout/fragment_newtask">
 
         <argument
             android:name="taskId"
             app:argType="string"
-            android:defaultValue="@null"
             app:nullable="true" />
 
         <action
-            android:id="@+id/action_taskList_to_taskDetail"
-            app:destination="@id/fragmentTaskDetail" />
-
-        <action
-            android:id="@+id/action_taskDetail_to_taskList"
-            app:destination="@id/fragmentTaskDetail"
-            app:popUpTo="@id/fragmentTaskDetail"
+            android:id="@+id/action_newTaskFragment_to_taskFragment"
+            app:destination="@id/taskFragment"
+            app:popUpTo="@id/taskFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_fragmentTaskDetail_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
     </fragment>
+
+    <!-- Fragmento para detalle de tarea -->
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.example.tomorrowmaybe.view.TaskDetailFragment"
+        android:label="Detalle de Tarea"
+        tools:layout="@layout/fragment_task_detail">
+        <argument
+            android:name="taskId"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_taskFragment"
+            app:destination="@id/taskFragment"
+            app:popUpTo="@id/taskFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>
