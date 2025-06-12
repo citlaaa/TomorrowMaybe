@@ -5,24 +5,29 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tomorrowmaybe.databinding.ItemTaskBinding
 import com.example.tomorrowmaybe.model.Task
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-class TasksAdapter(
+
+class TaskAdapter(
     private var tasks: List<Task>,
     private val onItemClick: (Task) -> Unit,
     private val onEditClick: (Task) -> Unit,
     private val onDeleteClick: (Task) -> Unit
-) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
+) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(private val binding: ItemTaskBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        fun bind(task: Task) {
+            binding.tvTaskTitle.text = task.name
+            binding.tvTaskDescription.text = task.description
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            binding.tvTaskDate.text = dateFormat.format(task.date)
 
-        fun bind(task: Task) = with(binding) {
-            this.task = task
-            executePendingBindings()
+            binding.ibEdit.setOnClickListener { onEditClick(task) }
+            binding.ibDelete.setOnClickListener { onDeleteClick(task) }
+            binding.root.setOnClickListener { onItemClick(task) }
 
-            root.setOnClickListener { onItemClick(task) }
-            ibEdit.setOnClickListener { onEditClick(task) }
-            ibDelete.setOnClickListener { onDeleteClick(task) }
         }
     }
 

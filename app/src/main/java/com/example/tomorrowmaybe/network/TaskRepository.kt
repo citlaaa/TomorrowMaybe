@@ -6,6 +6,7 @@ import com.example.tomorrowmaybe.core.ResultWrapper
 import com.example.tomorrowmaybe.model.Task
 import com.example.tomorrowmaybe.core.safeCall
 import kotlinx.coroutines.tasks.await
+import java.util.Date
 
 
 class TaskRepository @Inject constructor(
@@ -15,18 +16,24 @@ class TaskRepository @Inject constructor(
 
     suspend fun addTask(task: Task): ResultWrapper<Void> = safeCall {
         val id = taskCollection.document().id
-        task.id = id
-        taskCollection.document(id).set(task).await()
+        val newTask = task.copy(id = id)
+        taskCollection.document(id).set(newTask).await()
     }
 
     suspend fun getTask(id: String): ResultWrapper<Task> = safeCall {
         val document = taskCollection.document(id).get().await()
-        document.toObject(Task::class.java) ?: throw Exception("Tarea no encontrada")
+        val task = document.toObject(Task::class.java)
+        val timestamp = document.getTimestamp("date")
+        task?.copy(date = timestamp?.toDate() ?: Date()) ?: throw Exception("Tarea no encontrada")
     }
 
     suspend fun getAllTasks(): ResultWrapper<List<Task>> = safeCall {
         val snapshot = taskCollection.get().await()
-        snapshot.toObjects(Task::class.java)
+        snapshot.documents.mapNotNull { document ->
+            val task = document.toObject(Task::class.java)
+            val timestamp = document.getTimestamp("date")
+            task?.copy(date = timestamp?.toDate() ?: Date())
+        }
     }
 
     suspend fun updateTask(task: Task): ResultWrapper<Void> = safeCall {

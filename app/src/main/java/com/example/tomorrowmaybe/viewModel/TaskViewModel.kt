@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tomorrowmaybe.core.ResultWrapper
 import com.example.tomorrowmaybe.model.Task
 import com.example.tomorrowmaybe.network.TaskRepository
-import com.example.tomorrowmaybe.core.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,56 +30,64 @@ class TaskViewModel @Inject constructor(
 
     fun fetchTasks() {
         viewModelScope.launch {
-            _loading.value = true
+            setLoading(true)
             when (val result = taskRepository.getAllTasks()) {
                 is ResultWrapper.Success -> _tasks.value = result.data
                 is ResultWrapper.Error -> _error.value = result.exception.message
             }
-            _loading.value = false
+            setLoading(false)
         }
     }
 
-    fun fetchTask(id: String) {
+    fun fetchTaskById(id: String) {
         viewModelScope.launch {
-            _loading.value = true
+            setLoading(true)
             when (val result = taskRepository.getTask(id)) {
                 is ResultWrapper.Success -> _selectedTask.value = result.data
                 is ResultWrapper.Error -> _error.value = result.exception.message
             }
-            _loading.value = false
+            setLoading(false)
         }
     }
 
     fun addTask(task: Task) {
         viewModelScope.launch {
-            _loading.value = true
+            setLoading(true)
             when (val result = taskRepository.addTask(task)) {
                 is ResultWrapper.Success -> fetchTasks()
                 is ResultWrapper.Error -> _error.value = result.exception.message
             }
-            _loading.value = false
+            setLoading(false)
         }
     }
 
     fun updateTask(task: Task) {
         viewModelScope.launch {
-            _loading.value = true
+            setLoading(true)
             when (val result = taskRepository.updateTask(task)) {
                 is ResultWrapper.Success -> fetchTasks()
                 is ResultWrapper.Error -> _error.value = result.exception.message
             }
-            _loading.value = false
+            setLoading(false)
         }
     }
 
     fun deleteTask(id: String) {
         viewModelScope.launch {
-            _loading.value = true
+            setLoading(true)
             when (val result = taskRepository.deleteTask(id)) {
                 is ResultWrapper.Success -> fetchTasks()
                 is ResultWrapper.Error -> _error.value = result.exception.message
             }
-            _loading.value = false
+            setLoading(false)
         }
+    }
+
+    fun clearError() {
+        _error.value = null
+    }
+
+    private fun setLoading(state: Boolean) {
+        _loading.value = state
     }
 }
